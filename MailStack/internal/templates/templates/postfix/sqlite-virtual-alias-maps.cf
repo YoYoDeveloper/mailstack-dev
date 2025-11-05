@@ -1,0 +1,6 @@
+# Postfix SQLite - Virtual Alias Maps
+# Resolve email aliases and forwards
+
+dbpath = {{ .Paths.Data }}/mailstack.db
+
+query = SELECT destination FROM aliases WHERE email='%s' AND enabled=1

@@ -1,0 +1,6 @@
+# Postfix SQLite - Virtual Mailbox Domains
+# Check if domain exists and is enabled
+
+dbpath = {{ .Paths.Data }}/mailstack.db
+
+query = SELECT name FROM domains WHERE name='%s' AND enabled=1

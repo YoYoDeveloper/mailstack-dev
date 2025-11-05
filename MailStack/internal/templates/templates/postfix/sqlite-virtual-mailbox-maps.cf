@@ -1,0 +1,6 @@
+# Postfix SQLite - Virtual Mailbox Maps
+# Check if user exists and is enabled
+
+dbpath = {{ .Paths.Data }}/mailstack.db
+
+query = SELECT email FROM users WHERE email='%s' AND enabled=1

@@ -253,12 +253,16 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Postfix configuration...")
 	}
 	postfixConfigs := map[string]string{
-		"templates/postfix/main.cf":                   "/etc/postfix/main.cf",
-		"templates/postfix/master.cf":                 "/etc/postfix/master.cf",
-		"templates/postfix/sasl_passwd":               "/etc/postfix/sasl_passwd",
-		"templates/postfix/outclean_header_filter.cf": "/etc/postfix/outclean_header_filter.cf",
-		"templates/postfix/mta-sts-daemon.yml":        "/etc/mta-sts-daemon.yml",
-		"templates/postfix/logrotate.conf":            "/etc/logrotate.d/postfix",
+		"templates/postfix/main.cf":                          "/etc/postfix/main.cf",
+		"templates/postfix/master.cf":                        "/etc/postfix/master.cf",
+		"templates/postfix/sasl_passwd":                      "/etc/postfix/sasl_passwd",
+		"templates/postfix/outclean_header_filter.cf":        "/etc/postfix/outclean_header_filter.cf",
+		"templates/postfix/mta-sts-daemon.yml":               "/etc/mta-sts-daemon.yml",
+		"templates/postfix/logrotate.conf":                   "/etc/logrotate.d/postfix",
+		"templates/postfix/sqlite-virtual-mailbox-domains.cf": "/etc/postfix/sqlite-virtual-mailbox-domains.cf",
+		"templates/postfix/sqlite-virtual-mailbox-maps.cf":    "/etc/postfix/sqlite-virtual-mailbox-maps.cf",
+		"templates/postfix/sqlite-virtual-alias-maps.cf":      "/etc/postfix/sqlite-virtual-alias-maps.cf",
+		"templates/postfix/sqlite-sender-login-maps.cf":       "/etc/postfix/sqlite-sender-login-maps.cf",
 	}
 
 	for template, output := range postfixConfigs {
@@ -299,12 +303,13 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Dovecot configuration...")
 	}
 	dovecotConfigs := map[string]string{
-		"templates/dovecot/dovecot.conf":      "/etc/dovecot/dovecot.conf",
-		"templates/dovecot/auth.conf":         "/etc/dovecot/conf.d/auth.conf",
-		"templates/dovecot/report-spam.sieve": "/etc/dovecot/report-spam.sieve",
-		"templates/dovecot/report-ham.sieve":  "/etc/dovecot/report-ham.sieve",
-		"templates/dovecot/spam.script":       "/etc/dovecot/spam.script",
-		"templates/dovecot/ham.script":        "/etc/dovecot/ham.script",
+		"templates/dovecot/dovecot.conf":         "/etc/dovecot/dovecot.conf",
+		"templates/dovecot/auth.conf":            "/etc/dovecot/conf.d/auth.conf",
+		"templates/dovecot/dovecot-sql.conf.ext": "/etc/dovecot/dovecot-sql.conf.ext",
+		"templates/dovecot/report-spam.sieve":    "/etc/dovecot/report-spam.sieve",
+		"templates/dovecot/report-ham.sieve":     "/etc/dovecot/report-ham.sieve",
+		"templates/dovecot/spam.script":          "/etc/dovecot/spam.script",
+		"templates/dovecot/ham.script":           "/etc/dovecot/ham.script",
 	}
 
 	for template, output := range dovecotConfigs {

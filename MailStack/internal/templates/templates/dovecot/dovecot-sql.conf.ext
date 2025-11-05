@@ -1,0 +1,33 @@
+# Dovecot SQL authentication configuration
+# This file tells Dovecot how to query the SQLite database
+
+driver = sqlite
+connect = {{ .Paths.Data }}/mailstack.db
+
+# Default password scheme - bcrypt
+default_pass_scheme = BLF-CRYPT
+
+# Password query - authenticate users
+password_query = \
+  SELECT email as user, password_hash as password \
+  FROM users \
+  WHERE email = '%u' AND enabled = 1
+
+# User query - get user information after authentication
+user_query = \
+  SELECT \
+    email as user, \
+    email as username, \
+    {{ .Paths.Mail }}/%d/%n as home, \
+    {{ .Paths.Mail }}/%d/%n/mail as mail, \
+    1000 as uid, \
+    1000 as gid, \
+    CONCAT('*:storage=', CAST(quota_bytes AS TEXT)) as quota_rule \
+  FROM users \
+  WHERE email = '%u' AND enabled = 1
+
+# Iterate query - list all users (for doveadm)
+iterate_query = \
+  SELECT email as user \
+  FROM users \
+  WHERE enabled = 1

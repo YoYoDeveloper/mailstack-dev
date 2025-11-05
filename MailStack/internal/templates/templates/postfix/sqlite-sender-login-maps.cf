@@ -1,0 +1,7 @@
+# Postfix SQLite - Sender Login Maps
+# Check if authenticated user can send from this address
+
+dbpath = {{ .Paths.Data }}/mailstack.db
+
+# Allow users to send from their own email address
+query = SELECT email FROM users WHERE email='%s' AND enabled=1

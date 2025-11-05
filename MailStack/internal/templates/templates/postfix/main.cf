@@ -79,21 +79,21 @@ smtpd_tls_CApath = /etc/ssl/certs
 # Virtual
 ###############
 
-# Virtual domains and mailboxes (will be integrated with admin API)
+# Virtual domains and mailboxes (SQLite database lookups)
 virtual_alias_domains =
-virtual_alias_maps = lmdb:{{ .DataPath }}/virtual_alias_maps
-virtual_mailbox_domains = lmdb:{{ .DataPath }}/virtual_domains
-virtual_mailbox_maps = lmdb:{{ .DataPath }}/virtual_mailbox_maps
+virtual_alias_maps = sqlite:/etc/postfix/sqlite-virtual-alias-maps.cf
+virtual_mailbox_domains = sqlite:/etc/postfix/sqlite-virtual-mailbox-domains.cf
+virtual_mailbox_maps = sqlite:/etc/postfix/sqlite-virtual-mailbox-maps.cf
 
 # Mail transport
 relay_domains =
 transport_maps = lmdb:/etc/postfix/transport.map
 virtual_transport = lmtp:inet:127.0.0.1:2525
 
-# Sender and recipient maps
-sender_canonical_maps = lmdb:{{ .DataPath }}/sender_canonical_maps
+# Sender and recipient maps  
+sender_canonical_maps =
 sender_canonical_classes = envelope_sender
-recipient_canonical_maps = lmdb:{{ .DataPath }}/recipient_canonical_maps
+recipient_canonical_maps =
 recipient_canonical_classes= envelope_recipient,header_recipient
 
 # Use native DNS stack
@@ -106,8 +106,8 @@ lmtp_host_lookup = native
 # Delay all rejects until all information can be logged
 smtpd_delay_reject = yes
 
-# Allowed senders
-smtpd_sender_login_maps = lmdb:{{ .DataPath }}/sender_login_maps
+# Allowed senders (SQLite lookup)
+smtpd_sender_login_maps = sqlite:/etc/postfix/sqlite-sender-login-maps.cf
 
 # Restrictions for incoming SMTP
 smtpd_helo_required = yes
