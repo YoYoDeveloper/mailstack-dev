@@ -38,7 +38,6 @@ mailstack.json
 # Data directories
 data/
 mail/
-dkim/
 queue/
 filter/
 certs/
