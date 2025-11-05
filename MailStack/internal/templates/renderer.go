@@ -13,7 +13,7 @@ import (
 	"github.com/mailstack/mailstack/internal/config"
 )
 
-//go:embed postfix/* dovecot/* rspamd/* nginx/*
+//go:embed templates/postfix/* templates/dovecot/* templates/rspamd/* templates/nginx/* templates/webmails/**
 var templatesFS embed.FS
 
 // Renderer handles template rendering
@@ -91,11 +91,14 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 	}
 
 	return map[string]interface{}{
+		// Basic domain config
 		"Domain":             r.config.Domain,
 		"Hostname":           r.config.Hostname,
 		"Hostnames":          hostnames,
 		"HostnamesStr":       strings.Join(hostnames, ","),
 		"Postmaster":         r.config.Postmaster,
+		
+		// Mail settings
 		"MessageSizeLimit":   r.config.Mail.MessageSizeLimit,
 		"MessageRateLimit":   r.config.Mail.MessageRateLimit,
 		"DefaultQuota":       r.config.Mail.DefaultQuota,
@@ -104,15 +107,34 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 		"RelayHost":          r.config.Mail.RelayHost,
 		"RelayUser":          r.config.Mail.RelayUser,
 		"RelayPassword":      r.config.Mail.RelayPassword,
+		
+		// Network settings
 		"Subnet":             r.config.Network.Subnet,
 		"Subnet6":            r.config.Network.Subnet6,
 		"BindIPv4":           r.config.Network.BindIPv4,
 		"BindIPv6":           r.config.Network.BindIPv6,
 		"RelayNetworks":      r.config.Network.RelayNetworks,
+		"RelayNets":          r.config.RelayNets,
+		"RealIPHeader":       r.config.RealIPHeader,
+		"RealIPFrom":         r.config.RealIPFrom,
+		
+		// TLS settings
 		"TLSFlavor":          r.config.TLS.Flavor,
+		"TLS":                r.config.TLS.TLS,
+		"TLS443":             r.config.TLS443,
+		"TLSError":           r.config.TLSError,
+		"TLSPermissive":      r.config.TLSPermissive,
+		
+		// Web paths
 		"AdminPath":          r.config.Web.AdminPath,
 		"WebmailPath":        r.config.Web.WebmailPath,
+		"WebAdmin":           r.config.Web.WebAdmin,
+		"WebWebmail":         r.config.Web.WebWebmail,
+		"WebAPI":             r.config.Web.WebAPI,
 		"Sitename":           r.config.Web.Sitename,
+		"WebrootRedirect":    r.config.WebrootRedirect,
+		
+		// Data paths (Linux-specific)
 		"DataPath":           r.config.Paths.Data,
 		"MailPath":           r.config.Paths.Mail,
 		"DKIMPath":           r.config.Paths.DKIM,
@@ -120,11 +142,50 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 		"FilterPath":         r.config.Paths.Filter,
 		"CertsPath":          r.config.Paths.Certs,
 		"OverridesPath":      r.config.Paths.Overrides,
+		
+		// Service addresses
+		"FrontAddress":       r.config.FrontAddress,
+		"AdminAddress":       r.config.AdminAddress,
+		"AntispamAddress":    r.config.AntispamAddress,
+		"WebmailAddress":     r.config.WebmailAddress,
+		"WebdavAddress":      r.config.WebdavAddress,
+		"RedisAddress":       r.config.RedisAddress,
+		"Resolver":           r.config.Resolver,
+		
+		// Security keys
 		"SecretKey":          r.config.SecretKey,
+		"RoundcubeKey":       r.config.RoundcubeKey,
+		"SnuffleupagusKey":   r.config.SnuffleupagusKey,
+		
+		// Database
+		"DBDsnw":             r.config.Database.DBDsnw,
+		
+		// Webmail settings
+		"Webmail":            r.config.Webmail,
+		"Plugins":            r.config.Plugins,
+		"Includes":           r.config.Includes,
+		"PermanentSessionLifetime": r.config.PermanentSessionLifetime,
+		"FullTextSearch":     r.config.FullTextSearch,
+		
+		// Additional settings
+		"Timezone":           r.config.Timezone,
+		"MaxFilesize":        r.config.MaxFilesize,
+		
+		// Port and protocol settings
+		"Port80":             r.config.Port80,
+		"ProxyProtocol25":    r.config.ProxyProtocol25,
+		"ProxyProtocol80":    r.config.ProxyProtocol80,
+		"ProxyProtocol443":   r.config.ProxyProtocol443,
+		
+		// Feature flags
+		"Admin":              r.config.Admin.Email != "",
+		"API":                r.config.API,
 		"EnableAntivirus":    r.config.Services.Antivirus,
 		"EnableWebmail":      r.config.Services.Webmail,
 		"EnableFetchmail":    r.config.Services.Fetchmail,
 		"EnableWebdav":       r.config.Services.Webdav,
+		"EnableOletools":     r.config.EnableOletools,
+		"Webdav":             r.config.Services.Webdav,
 	}
 }
 
@@ -152,12 +213,53 @@ func (r *Renderer) getFuncMap() template.FuncMap {
 		"trim": func(s string) string {
 			return strings.TrimSpace(s)
 		},
-		// Jinja2-like conditionals
 		"default": func(value, defaultValue interface{}) interface{} {
 			if value == nil || value == "" {
 				return defaultValue
 			}
 			return value
+		},
+		// Math functions
+		"add": func(a, b int) int {
+			return a + b
+		},
+		"sub": func(a, b int) int {
+			return a - b
+		},
+		"mul": func(a, b int) int {
+			return a * b
+		},
+		"div": func(a, b int) int {
+			if b == 0 {
+				return 0
+			}
+			return a / b
+		},
+		// Comparison functions (these are built-in but explicit for clarity)
+		"eq": func(a, b interface{}) bool {
+			return a == b
+		},
+		"ne": func(a, b interface{}) bool {
+			return a != b
+		},
+		"lt": func(a, b int) bool {
+			return a < b
+		},
+		"le": func(a, b int) bool {
+			return a <= b
+		},
+		"gt": func(a, b int) bool {
+			return a > b
+		},
+		"ge": func(a, b int) bool {
+			return a >= b
+		},
+		// Index function for arrays
+		"index": func(slice []string, i int) string {
+			if i >= 0 && i < len(slice) {
+				return slice[i]
+			}
+			return ""
 		},
 	}
 }

@@ -46,7 +46,7 @@ func configRegenerateCmd() *cobra.Command {
 		Use:   "regenerate",
 		Short: "Regenerate all service configuration files",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			cfg, err := config.Load(cfgFile)
+			_, err := config.Load(cfgFile)
 			if err != nil {
 				return err
 			}

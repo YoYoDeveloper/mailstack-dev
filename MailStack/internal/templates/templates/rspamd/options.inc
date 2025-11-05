@@ -1,0 +1,1 @@
+local_networks = [{{ .Subnet }}{{if .Subnet6}}, {{ .Subnet6 }}{{end}}{{if .RelayNets}}, {{ .RelayNets }}{{end}}];

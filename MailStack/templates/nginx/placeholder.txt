@@ -1,2 +1,0 @@
-# Placeholder file for nginx templates
-# Will be populated with actual nginx configs
