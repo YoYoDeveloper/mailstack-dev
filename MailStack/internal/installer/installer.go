@@ -253,12 +253,12 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Postfix configuration...")
 	}
 	postfixConfigs := map[string]string{
-		"templates/postfix/main.cf":                     "/etc/postfix/main.cf",
-		"templates/postfix/master.cf":                   "/etc/postfix/master.cf",
-		"templates/postfix/sasl_passwd":                 "/etc/postfix/sasl_passwd",
-		"templates/postfix/outclean_header_filter.cf":   "/etc/postfix/outclean_header_filter.cf",
-		"templates/postfix/mta-sts-daemon.yml":          "/etc/mta-sts-daemon.yml",
-		"templates/postfix/logrotate.conf":              "/etc/logrotate.d/postfix",
+		"templates/postfix/main.cf":                   "/etc/postfix/main.cf",
+		"templates/postfix/master.cf":                 "/etc/postfix/master.cf",
+		"templates/postfix/sasl_passwd":               "/etc/postfix/sasl_passwd",
+		"templates/postfix/outclean_header_filter.cf": "/etc/postfix/outclean_header_filter.cf",
+		"templates/postfix/mta-sts-daemon.yml":        "/etc/mta-sts-daemon.yml",
+		"templates/postfix/logrotate.conf":            "/etc/logrotate.d/postfix",
 	}
 
 	for template, output := range postfixConfigs {
@@ -299,12 +299,12 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Dovecot configuration...")
 	}
 	dovecotConfigs := map[string]string{
-		"templates/dovecot/dovecot.conf":        "/etc/dovecot/dovecot.conf",
-		"templates/dovecot/auth.conf":           "/etc/dovecot/conf.d/auth.conf",
-		"templates/dovecot/report-spam.sieve":   "/etc/dovecot/report-spam.sieve",
-		"templates/dovecot/report-ham.sieve":    "/etc/dovecot/report-ham.sieve",
-		"templates/dovecot/spam.script":         "/etc/dovecot/spam.script",
-		"templates/dovecot/ham.script":          "/etc/dovecot/ham.script",
+		"templates/dovecot/dovecot.conf":      "/etc/dovecot/dovecot.conf",
+		"templates/dovecot/auth.conf":         "/etc/dovecot/conf.d/auth.conf",
+		"templates/dovecot/report-spam.sieve": "/etc/dovecot/report-spam.sieve",
+		"templates/dovecot/report-ham.sieve":  "/etc/dovecot/report-ham.sieve",
+		"templates/dovecot/spam.script":       "/etc/dovecot/spam.script",
+		"templates/dovecot/ham.script":        "/etc/dovecot/ham.script",
 	}
 
 	for template, output := range dovecotConfigs {
@@ -321,30 +321,30 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Rspamd configuration...")
 	}
 	rspamdConfigs := map[string]string{
-		"templates/rspamd/antivirus.conf":                  "/etc/rspamd/local.d/antivirus.conf",
-		"templates/rspamd/arc.conf":                        "/etc/rspamd/local.d/arc.conf",
-		"templates/rspamd/classifier-bayes.conf":           "/etc/rspamd/local.d/classifier-bayes.conf",
-		"templates/rspamd/composites.conf":                 "/etc/rspamd/local.d/composites.conf",
-		"templates/rspamd/dkim_signing.conf":               "/etc/rspamd/local.d/dkim_signing.conf",
-		"templates/rspamd/external_services.conf":          "/etc/rspamd/local.d/external_services.conf",
-		"templates/rspamd/external_services_group.conf":    "/etc/rspamd/local.d/external_services_group.conf",
-		"templates/rspamd/forbidden_file_extension.map":    "/etc/rspamd/local.d/forbidden_file_extension.map",
-		"templates/rspamd/force_actions.conf":              "/etc/rspamd/local.d/force_actions.conf",
-		"templates/rspamd/fuzzy_check.conf":                "/etc/rspamd/local.d/fuzzy_check.conf",
-		"templates/rspamd/headers_group.conf":              "/etc/rspamd/local.d/headers_group.conf",
-		"templates/rspamd/history_redis.conf":              "/etc/rspamd/local.d/history_redis.conf",
-		"templates/rspamd/local_subnet.map":                "/etc/rspamd/local.d/local_subnet.map",
-		"templates/rspamd/metrics.conf":                    "/etc/rspamd/local.d/metrics.conf",
-		"templates/rspamd/milter_headers.conf":             "/etc/rspamd/local.d/milter_headers.conf",
-		"templates/rspamd/multimap.conf":                   "/etc/rspamd/local.d/multimap.conf",
-		"templates/rspamd/redis.conf":                      "/etc/rspamd/local.d/redis.conf",
-		"templates/rspamd/whitelist.conf":                  "/etc/rspamd/local.d/whitelist.conf",
-		"templates/rspamd/options.inc":                     "/etc/rspamd/local.d/options.inc",
-		"templates/rspamd/logging.inc":                     "/etc/rspamd/local.d/logging.inc",
-		"templates/rspamd/worker-controller.inc":           "/etc/rspamd/local.d/worker-controller.inc",
-		"templates/rspamd/worker-fuzzy.inc":                "/etc/rspamd/local.d/worker-fuzzy.inc",
-		"templates/rspamd/worker-normal.inc":               "/etc/rspamd/local.d/worker-normal.inc",
-		"templates/rspamd/worker-proxy.inc":                "/etc/rspamd/local.d/worker-proxy.inc",
+		"templates/rspamd/antivirus.conf":               "/etc/rspamd/local.d/antivirus.conf",
+		"templates/rspamd/arc.conf":                     "/etc/rspamd/local.d/arc.conf",
+		"templates/rspamd/classifier-bayes.conf":        "/etc/rspamd/local.d/classifier-bayes.conf",
+		"templates/rspamd/composites.conf":              "/etc/rspamd/local.d/composites.conf",
+		"templates/rspamd/dkim_signing.conf":            "/etc/rspamd/local.d/dkim_signing.conf",
+		"templates/rspamd/external_services.conf":       "/etc/rspamd/local.d/external_services.conf",
+		"templates/rspamd/external_services_group.conf": "/etc/rspamd/local.d/external_services_group.conf",
+		"templates/rspamd/forbidden_file_extension.map": "/etc/rspamd/local.d/forbidden_file_extension.map",
+		"templates/rspamd/force_actions.conf":           "/etc/rspamd/local.d/force_actions.conf",
+		"templates/rspamd/fuzzy_check.conf":             "/etc/rspamd/local.d/fuzzy_check.conf",
+		"templates/rspamd/headers_group.conf":           "/etc/rspamd/local.d/headers_group.conf",
+		"templates/rspamd/history_redis.conf":           "/etc/rspamd/local.d/history_redis.conf",
+		"templates/rspamd/local_subnet.map":             "/etc/rspamd/local.d/local_subnet.map",
+		"templates/rspamd/metrics.conf":                 "/etc/rspamd/local.d/metrics.conf",
+		"templates/rspamd/milter_headers.conf":          "/etc/rspamd/local.d/milter_headers.conf",
+		"templates/rspamd/multimap.conf":                "/etc/rspamd/local.d/multimap.conf",
+		"templates/rspamd/redis.conf":                   "/etc/rspamd/local.d/redis.conf",
+		"templates/rspamd/whitelist.conf":               "/etc/rspamd/local.d/whitelist.conf",
+		"templates/rspamd/options.inc":                  "/etc/rspamd/local.d/options.inc",
+		"templates/rspamd/logging.inc":                  "/etc/rspamd/local.d/logging.inc",
+		"templates/rspamd/worker-controller.inc":        "/etc/rspamd/local.d/worker-controller.inc",
+		"templates/rspamd/worker-fuzzy.inc":             "/etc/rspamd/local.d/worker-fuzzy.inc",
+		"templates/rspamd/worker-normal.inc":            "/etc/rspamd/local.d/worker-normal.inc",
+		"templates/rspamd/worker-proxy.inc":             "/etc/rspamd/local.d/worker-proxy.inc",
 	}
 
 	for template, output := range rspamdConfigs {
@@ -360,7 +360,7 @@ func (i *Installer) generateConfigs() error {
 	if i.verbose {
 		fmt.Println("  Generating Nginx configuration...")
 	}
-	
+
 	// Copy dhparam.pem (it's not a template, just a static file)
 	dhparamSrc := filepath.Join(i.config.Paths.Data, "dhparam.pem")
 	if _, err := os.Stat(dhparamSrc); os.IsNotExist(err) {
@@ -373,11 +373,11 @@ func (i *Installer) generateConfigs() error {
 			return fmt.Errorf("failed to generate dhparam: %w", err)
 		}
 	}
-	
+
 	nginxConfigs := map[string]string{
-		"templates/nginx/nginx.conf":       "/etc/nginx/nginx.conf",
-		"templates/nginx/proxy.conf":       "/etc/nginx/proxy.conf",
-		"templates/nginx/tls.conf":         "/etc/nginx/tls.conf",
+		"templates/nginx/nginx.conf": "/etc/nginx/nginx.conf",
+		"templates/nginx/proxy.conf": "/etc/nginx/proxy.conf",
+		"templates/nginx/tls.conf":   "/etc/nginx/tls.conf",
 	}
 
 	for template, output := range nginxConfigs {
@@ -394,11 +394,11 @@ func (i *Installer) generateConfigs() error {
 		if i.verbose {
 			fmt.Printf("  Generating Webmail configuration (%s)...\n", i.config.Webmail)
 		}
-		
+
 		webmailConfigs := map[string]string{
-			"templates/webmails/nginx-webmail.conf": "/etc/nginx/sites-available/webmail.conf",
-			"templates/webmails/php-webmail.conf":   "/etc/php/8.1/fpm/pool.d/webmail.conf",
-			"templates/webmails/php.ini":            "/etc/php/8.1/fpm/conf.d/99-mailstack.ini",
+			"templates/webmails/nginx-webmail.conf":  "/etc/nginx/sites-available/webmail.conf",
+			"templates/webmails/php-webmail.conf":    "/etc/php/8.1/fpm/pool.d/webmail.conf",
+			"templates/webmails/php.ini":             "/etc/php/8.1/fpm/conf.d/99-mailstack.ini",
 			"templates/webmails/snuffleupagus.rules": "/etc/snuffleupagus.rules",
 		}
 
@@ -439,7 +439,7 @@ func (i *Installer) generateConfigs() error {
 				}
 			}
 		}
-		
+
 		// Enable webmail nginx site
 		webmailLink := "/etc/nginx/sites-enabled/webmail.conf"
 		if _, err := os.Stat(webmailLink); os.IsNotExist(err) {
@@ -743,7 +743,7 @@ func (i *Installer) setupLetsEncrypt() error {
 
 	// Prepare domain list
 	domains := []string{i.config.Hostname}
-	
+
 	// Add webmail domain if different
 	if i.config.Webmail != "" && i.config.Webmail != "none" {
 		webmailDomain := "webmail." + i.config.Domain
@@ -774,7 +774,7 @@ func (i *Installer) setupLetsEncrypt() error {
 	cmd := exec.Command("certbot", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	
+
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("certbot failed: %w\nMake sure your domain DNS is pointing to this server and ports 80/443 are open", err)
 	}
@@ -974,7 +974,7 @@ RestartSec=10s
 	if i.config.Services.Antivirus {
 		clamdDir := "/etc/systemd/system/clamav-daemon.service.d"
 		freshclamDir := "/etc/systemd/system/clamav-freshclam.service.d"
-		
+
 		if err := system.CreateDirectory(clamdDir, "root", 0755); err != nil {
 			return fmt.Errorf("failed to create clamd override directory: %w", err)
 		}
@@ -1028,11 +1028,11 @@ func (i *Installer) startServices() error {
 
 	// Define service start order (dependencies first)
 	services := []string{
-		"redis",        // Cache - needed by others
-		"rspamd",       // Anti-spam
-		"postfix",      // SMTP
-		"dovecot",      // IMAP/POP3/LMTP
-		"nginx",        // Web proxy
+		"redis",   // Cache - needed by others
+		"rspamd",  // Anti-spam
+		"postfix", // SMTP
+		"dovecot", // IMAP/POP3/LMTP
+		"nginx",   // Web proxy
 	}
 
 	// Add optional services
@@ -1049,7 +1049,7 @@ func (i *Installer) startServices() error {
 		if i.verbose {
 			fmt.Printf("  Enabling %s...\n", service)
 		}
-		
+
 		// Enable service to start on boot
 		if err := system.EnableService(service); err != nil {
 			fmt.Printf("  Warning: Failed to enable %s: %v\n", service, err)
@@ -1075,7 +1075,7 @@ func (i *Installer) startServices() error {
 	if i.verbose {
 		fmt.Println("  Restarting services to apply new configurations...")
 	}
-	
+
 	restartServices := []string{"postfix", "dovecot", "rspamd", "nginx"}
 	for _, service := range restartServices {
 		if i.verbose {
@@ -1145,7 +1145,7 @@ func (i *Installer) healthCheck() error {
 	}
 
 	services := []string{"redis", "rspamd", "postfix", "dovecot", "nginx"}
-	
+
 	// Add optional services
 	if i.config.Webmail != "" && i.config.Webmail != "none" {
 		services = append(services, "php8.1-fpm")
@@ -1159,7 +1159,7 @@ func (i *Installer) healthCheck() error {
 		cmd := exec.Command("systemctl", "is-active", service)
 		output, err := cmd.Output()
 		status := string(output)
-		
+
 		if err != nil || status != "active\n" {
 			if i.verbose {
 				fmt.Printf("  ✗ %s: NOT RUNNING\n", service)
