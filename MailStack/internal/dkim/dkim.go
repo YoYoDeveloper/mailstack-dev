@@ -115,9 +115,9 @@ func formatDNSRecord(pemKey string) string {
 			keyData = append(keyData, line)
 		}
 	}
-	
+
 	base64Key := strings.Join(keyData, "")
-	
+
 	// Format as DKIM record
 	return fmt.Sprintf("v=DKIM1; k=rsa; p=%s", base64Key)
 }
