@@ -1,0 +1,2 @@
+# Placeholder file for dovecot templates
+# Will be populated with actual dovecot configs
