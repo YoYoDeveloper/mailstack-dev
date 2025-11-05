@@ -1,0 +1,105 @@
+{
+  "_comment": "MailStack Configuration Example",
+  "_comment2": "Copy this file to config.json and customize for your setup",
+  
+  "domain": "example.com",
+  "hostname": "mail.example.com",
+  "postmaster": "postmaster",
+  "subnet": "192.168.1.0/24",
+  
+  "database": {
+    "type": "sqlite",
+    "path": "/var/lib/mailstack/mailstack.db"
+  },
+  
+  "tls": {
+    "flavor": "letsencrypt",
+    "email": "admin@example.com"
+  },
+  
+  "mail": {
+    "message_size_limit": 52428800,
+    "message_ratelimit": "200/day",
+    "default_quota": 1073741824,
+    "recipient_delimiter": "+",
+    "dkim_selector": "dkim",
+    "relay_host": ""
+  },
+  
+  "network": {
+    "bind_ipv4": "0.0.0.0",
+    "bind_ipv6": "::",
+    "relaynets": "192.168.1.0/24"
+  },
+  
+  "web": {
+    "admin": "admin.example.com",
+    "webmail": "webmail.example.com"
+  },
+  
+  "services": {
+    "antivirus": false,
+    "webmail": "roundcube",
+    "fetchmail": false
+  },
+  
+  "paths": {
+    "data": "/var/lib/mailstack",
+    "mail": "/var/mail",
+    "dkim": "/var/lib/mailstack/dkim",
+    "queue": "/var/spool/postfix",
+    "filter": "/var/lib/mailstack/filter",
+    "certs": "/var/lib/mailstack/certs",
+    "overrides": "/var/lib/mailstack/overrides",
+    "webmail_path": "/var/www/webmail"
+  },
+  
+  "secret_key": "CHANGE-THIS-TO-RANDOM-STRING-32-CHARS",
+  
+  "admin_address": "admin@example.com",
+  "postmaster_address": "postmaster@example.com",
+  "antispam_address": "antispam@example.com",
+  "dmarc_address": "dmarc@example.com",
+  "security_address": "security@example.com",
+  "webmail_address": "webmail@example.com",
+  
+  "redis_address": "127.0.0.1",
+  "admin_internal_address": "127.0.0.1:8080",
+  "antispam_internal_address": "127.0.0.1:11334",
+  "webmail_internal_address": "127.0.0.1:8000",
+  
+  "webmail": "roundcube",
+  "roundcube_db_flavor": "sqlite",
+  "roundcube_db_host": "",
+  "roundcube_db_name": "roundcube",
+  "roundcube_db_user": "roundcube",
+  "roundcube_db_password": "",
+  
+  "snappymail_db_driver": "sqlite",
+  "snappymail_db_host": "",
+  "snappymail_db_name": "snappymail",
+  "snappymail_db_user": "snappymail",
+  "snappymail_db_password": "",
+  
+  "fetchmail_enabled": false,
+  "fetchmail_delay": 600,
+  
+  "welcome_enabled": true,
+  "welcome_subject": "Welcome to your new mailbox",
+  "welcome_body": "Welcome! Your mailbox has been created.",
+  
+  "dmarc_rua": "dmarc@example.com",
+  "dmarc_ruf": "dmarc@example.com",
+  
+  "compression_level": 6,
+  
+  "sitename": "MailStack Mail Server",
+  
+  "web_admin": "/admin",
+  "web_webmail": "/webmail",
+  
+  "recaptcha_public_key": "",
+  "recaptcha_private_key": "",
+  
+  "log_level": "INFO"
+}
