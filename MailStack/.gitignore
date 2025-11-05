@@ -36,8 +36,3 @@ mailstack.json
 *.local.json
 
 # Data directories
-data/
-mail/
-queue/
-filter/
-certs/
