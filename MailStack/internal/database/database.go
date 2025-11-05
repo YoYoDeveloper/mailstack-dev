@@ -352,6 +352,146 @@ CREATE INDEX IF NOT EXISTS idx_aliases_email ON aliases(email);
 	return nil
 }
 
+// Alias represents an email alias
+type Alias struct {
+	Email       string
+	Destination string
+	Enabled     bool
+}
+
+// AddAlias creates a new email alias
+func (db *DB) AddAlias(email, destination string) error {
+	// Validate email format
+	parts := strings.Split(email, "@")
+	if len(parts) != 2 {
+		return fmt.Errorf("invalid email format: %s", email)
+	}
+	domain := parts[1]
+
+	// Check if domain exists
+	var domainExists bool
+	err := db.conn.QueryRow("SELECT COUNT(*) > 0 FROM domains WHERE name = ?", domain).Scan(&domainExists)
+	if err != nil {
+		return fmt.Errorf("failed to check domain: %w", err)
+	}
+	if !domainExists {
+		return fmt.Errorf("domain %s does not exist - add it first with 'mailstack domain add %s'", domain, domain)
+	}
+
+	// Check if alias already exists
+	var exists bool
+	err = db.conn.QueryRow("SELECT COUNT(*) > 0 FROM aliases WHERE email = ?", email).Scan(&exists)
+	if err != nil {
+		return fmt.Errorf("failed to check alias: %w", err)
+	}
+	if exists {
+		return fmt.Errorf("alias %s already exists", email)
+	}
+
+	// Check if it conflicts with an actual user
+	var userExists bool
+	err = db.conn.QueryRow("SELECT COUNT(*) > 0 FROM users WHERE email = ?", email).Scan(&userExists)
+	if err != nil {
+		return fmt.Errorf("failed to check user: %w", err)
+	}
+	if userExists {
+		return fmt.Errorf("cannot create alias: %s is already a real user", email)
+	}
+
+	// Validate destination addresses
+	destinations := strings.Split(destination, ",")
+	for i, dest := range destinations {
+		destinations[i] = strings.TrimSpace(dest)
+		if destinations[i] == "" {
+			return fmt.Errorf("empty destination address")
+		}
+		// Basic validation
+		if !strings.Contains(destinations[i], "@") {
+			return fmt.Errorf("invalid destination address: %s", destinations[i])
+		}
+	}
+
+	// Insert alias
+	_, err = db.conn.Exec(`
+		INSERT INTO aliases (email, destination, enabled)
+		VALUES (?, ?, 1)
+	`, email, destination)
+
+	if err != nil {
+		return fmt.Errorf("failed to create alias: %w", err)
+	}
+
+	return nil
+}
+
+// DeleteAlias removes an email alias
+func (db *DB) DeleteAlias(email string) error {
+	// Check if alias exists
+	var exists bool
+	err := db.conn.QueryRow("SELECT COUNT(*) > 0 FROM aliases WHERE email = ?", email).Scan(&exists)
+	if err != nil {
+		return fmt.Errorf("failed to check alias: %w", err)
+	}
+	if !exists {
+		return fmt.Errorf("alias %s does not exist", email)
+	}
+
+	// Delete alias
+	_, err = db.conn.Exec("DELETE FROM aliases WHERE email = ?", email)
+	if err != nil {
+		return fmt.Errorf("failed to delete alias: %w", err)
+	}
+
+	return nil
+}
+
+// ListAliases returns all email aliases
+func (db *DB) ListAliases() ([]Alias, error) {
+	rows, err := db.conn.Query(`
+		SELECT email, destination, enabled 
+		FROM aliases 
+		ORDER BY email
+	`)
+	if err != nil {
+		return nil, fmt.Errorf("failed to query aliases: %w", err)
+	}
+	defer rows.Close()
+
+	var aliases []Alias
+	for rows.Next() {
+		var alias Alias
+		if err := rows.Scan(&alias.Email, &alias.Destination, &alias.Enabled); err != nil {
+			return nil, fmt.Errorf("failed to scan alias: %w", err)
+		}
+		aliases = append(aliases, alias)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iterating aliases: %w", err)
+	}
+
+	return aliases, nil
+}
+
+// GetAlias returns details for a specific alias
+func (db *DB) GetAlias(email string) (*Alias, error) {
+	var alias Alias
+	err := db.conn.QueryRow(`
+		SELECT email, destination, enabled 
+		FROM aliases 
+		WHERE email = ?
+	`, email).Scan(&alias.Email, &alias.Destination, &alias.Enabled)
+
+	if err == sql.ErrNoRows {
+		return nil, fmt.Errorf("alias %s not found", email)
+	}
+	if err != nil {
+		return nil, fmt.Errorf("failed to get alias: %w", err)
+	}
+
+	return &alias, nil
+}
+
 // Migrate runs database migrations
 func (db *DB) Migrate() error {
 	// Check current schema version

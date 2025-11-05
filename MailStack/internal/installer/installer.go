@@ -253,12 +253,12 @@ func (i *Installer) generateConfigs() error {
 		fmt.Println("  Generating Postfix configuration...")
 	}
 	postfixConfigs := map[string]string{
-		"templates/postfix/main.cf":                          "/etc/postfix/main.cf",
-		"templates/postfix/master.cf":                        "/etc/postfix/master.cf",
-		"templates/postfix/sasl_passwd":                      "/etc/postfix/sasl_passwd",
-		"templates/postfix/outclean_header_filter.cf":        "/etc/postfix/outclean_header_filter.cf",
-		"templates/postfix/mta-sts-daemon.yml":               "/etc/mta-sts-daemon.yml",
-		"templates/postfix/logrotate.conf":                   "/etc/logrotate.d/postfix",
+		"templates/postfix/main.cf":                           "/etc/postfix/main.cf",
+		"templates/postfix/master.cf":                         "/etc/postfix/master.cf",
+		"templates/postfix/sasl_passwd":                       "/etc/postfix/sasl_passwd",
+		"templates/postfix/outclean_header_filter.cf":         "/etc/postfix/outclean_header_filter.cf",
+		"templates/postfix/mta-sts-daemon.yml":                "/etc/mta-sts-daemon.yml",
+		"templates/postfix/logrotate.conf":                    "/etc/logrotate.d/postfix",
 		"templates/postfix/sqlite-virtual-mailbox-domains.cf": "/etc/postfix/sqlite-virtual-mailbox-domains.cf",
 		"templates/postfix/sqlite-virtual-mailbox-maps.cf":    "/etc/postfix/sqlite-virtual-mailbox-maps.cf",
 		"templates/postfix/sqlite-virtual-alias-maps.cf":      "/etc/postfix/sqlite-virtual-alias-maps.cf",

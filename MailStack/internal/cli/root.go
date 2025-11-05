@@ -29,6 +29,7 @@ Postfix, Dovecot, Rspamd, Nginx, and other components on bare metal or VMs.`,
 	rootCmd.AddCommand(installCmd())
 	rootCmd.AddCommand(userCmd())
 	rootCmd.AddCommand(domainCmd())
+	rootCmd.AddCommand(aliasCmd())
 	rootCmd.AddCommand(dkimCmd())
 	rootCmd.AddCommand(statusCmd())
 	rootCmd.AddCommand(updateCmd())
