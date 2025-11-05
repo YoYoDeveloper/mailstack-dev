@@ -1,0 +1,50 @@
+{
+  "domain": "example.com",
+  "hostname": "mail.example.com",
+  "postmaster": "postmaster",
+  "admin": {
+    "email": "admin@example.com",
+    "password": "ChangeThisPassword!"
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "/var/lib/mailstack/mailstack.db"
+  },
+  "tls": {
+    "flavor": "letsencrypt",
+    "email": "admin@example.com"
+  },
+  "mail": {
+    "message_size_limit": 50000000,
+    "message_ratelimit": "200/day",
+    "default_quota": 1000000000,
+    "recipient_delimiter": "+",
+    "dkim_selector": "dkim"
+  },
+  "web": {
+    "admin_path": "/admin",
+    "webmail_path": "/webmail",
+    "sitename": "MailStack",
+    "website": "https://mail.example.com"
+  },
+  "services": {
+    "antivirus": false,
+    "webmail": true,
+    "fetchmail": false,
+    "webdav": false,
+    "oletools": false
+  },
+  "network": {
+    "subnet": "192.168.203.0/24",
+    "bind_ipv4": "0.0.0.0"
+  },
+  "paths": {
+    "data": "/var/lib/mailstack/data",
+    "mail": "/var/lib/mailstack/mail",
+    "dkim": "/var/lib/mailstack/dkim",
+    "queue": "/var/lib/mailstack/queue",
+    "filter": "/var/lib/mailstack/filter",
+    "certs": "/var/lib/mailstack/certs",
+    "overrides": "/etc/mailstack/overrides"
+  }
+}

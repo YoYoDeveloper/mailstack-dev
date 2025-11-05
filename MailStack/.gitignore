@@ -1,0 +1,44 @@
+# Binaries
+mailstack
+mailstack.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Build artifacts
+bin/
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config files (may contain sensitive data)
+mailstack.json
+*.local.json
+
+# Data directories
+data/
+mail/
+dkim/
+queue/
+filter/
+certs/
