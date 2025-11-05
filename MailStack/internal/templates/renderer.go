@@ -92,12 +92,12 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 
 	return map[string]interface{}{
 		// Basic domain config
-		"Domain":             r.config.Domain,
-		"Hostname":           r.config.Hostname,
-		"Hostnames":          hostnames,
-		"HostnamesStr":       strings.Join(hostnames, ","),
-		"Postmaster":         r.config.Postmaster,
-		
+		"Domain":       r.config.Domain,
+		"Hostname":     r.config.Hostname,
+		"Hostnames":    hostnames,
+		"HostnamesStr": strings.Join(hostnames, ","),
+		"Postmaster":   r.config.Postmaster,
+
 		// Mail settings
 		"MessageSizeLimit":   r.config.Mail.MessageSizeLimit,
 		"MessageRateLimit":   r.config.Mail.MessageRateLimit,
@@ -107,85 +107,85 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 		"RelayHost":          r.config.Mail.RelayHost,
 		"RelayUser":          r.config.Mail.RelayUser,
 		"RelayPassword":      r.config.Mail.RelayPassword,
-		
+
 		// Network settings
-		"Subnet":             r.config.Network.Subnet,
-		"Subnet6":            r.config.Network.Subnet6,
-		"BindIPv4":           r.config.Network.BindIPv4,
-		"BindIPv6":           r.config.Network.BindIPv6,
-		"RelayNetworks":      r.config.Network.RelayNetworks,
-		"RelayNets":          r.config.RelayNets,
-		"RealIPHeader":       r.config.RealIPHeader,
-		"RealIPFrom":         r.config.RealIPFrom,
-		
+		"Subnet":        r.config.Network.Subnet,
+		"Subnet6":       r.config.Network.Subnet6,
+		"BindIPv4":      r.config.Network.BindIPv4,
+		"BindIPv6":      r.config.Network.BindIPv6,
+		"RelayNetworks": r.config.Network.RelayNetworks,
+		"RelayNets":     r.config.RelayNets,
+		"RealIPHeader":  r.config.RealIPHeader,
+		"RealIPFrom":    r.config.RealIPFrom,
+
 		// TLS settings
-		"TLSFlavor":          r.config.TLS.Flavor,
-		"TLS":                r.config.TLS.TLS,
-		"TLS443":             r.config.TLS443,
-		"TLSError":           r.config.TLSError,
-		"TLSPermissive":      r.config.TLSPermissive,
-		
+		"TLSFlavor":     r.config.TLS.Flavor,
+		"TLS":           r.config.TLS.TLS,
+		"TLS443":        r.config.TLS443,
+		"TLSError":      r.config.TLSError,
+		"TLSPermissive": r.config.TLSPermissive,
+
 		// Web paths
-		"AdminPath":          r.config.Web.AdminPath,
-		"WebmailPath":        r.config.Web.WebmailPath,
-		"WebAdmin":           r.config.Web.WebAdmin,
-		"WebWebmail":         r.config.Web.WebWebmail,
-		"WebAPI":             r.config.Web.WebAPI,
-		"Sitename":           r.config.Web.Sitename,
-		"WebrootRedirect":    r.config.WebrootRedirect,
-		
+		"AdminPath":       r.config.Web.AdminPath,
+		"WebmailPath":     r.config.Web.WebmailPath,
+		"WebAdmin":        r.config.Web.WebAdmin,
+		"WebWebmail":      r.config.Web.WebWebmail,
+		"WebAPI":          r.config.Web.WebAPI,
+		"Sitename":        r.config.Web.Sitename,
+		"WebrootRedirect": r.config.WebrootRedirect,
+
 		// Data paths (Linux-specific)
-		"DataPath":           r.config.Paths.Data,
-		"MailPath":           r.config.Paths.Mail,
-		"DKIMPath":           r.config.Paths.DKIM,
-		"QueuePath":          r.config.Paths.Queue,
-		"FilterPath":         r.config.Paths.Filter,
-		"CertsPath":          r.config.Paths.Certs,
-		"OverridesPath":      r.config.Paths.Overrides,
-		
+		"DataPath":      r.config.Paths.Data,
+		"MailPath":      r.config.Paths.Mail,
+		"DKIMPath":      r.config.Paths.DKIM,
+		"QueuePath":     r.config.Paths.Queue,
+		"FilterPath":    r.config.Paths.Filter,
+		"CertsPath":     r.config.Paths.Certs,
+		"OverridesPath": r.config.Paths.Overrides,
+
 		// Service addresses
-		"FrontAddress":       r.config.FrontAddress,
-		"AdminAddress":       r.config.AdminAddress,
-		"AntispamAddress":    r.config.AntispamAddress,
-		"WebmailAddress":     r.config.WebmailAddress,
-		"WebdavAddress":      r.config.WebdavAddress,
-		"RedisAddress":       r.config.RedisAddress,
-		"Resolver":           r.config.Resolver,
-		
+		"FrontAddress":    r.config.FrontAddress,
+		"AdminAddress":    r.config.AdminAddress,
+		"AntispamAddress": r.config.AntispamAddress,
+		"WebmailAddress":  r.config.WebmailAddress,
+		"WebdavAddress":   r.config.WebdavAddress,
+		"RedisAddress":    r.config.RedisAddress,
+		"Resolver":        r.config.Resolver,
+
 		// Security keys
-		"SecretKey":          r.config.SecretKey,
-		"RoundcubeKey":       r.config.RoundcubeKey,
-		"SnuffleupagusKey":   r.config.SnuffleupagusKey,
-		
+		"SecretKey":        r.config.SecretKey,
+		"RoundcubeKey":     r.config.RoundcubeKey,
+		"SnuffleupagusKey": r.config.SnuffleupagusKey,
+
 		// Database
-		"DBDsnw":             r.config.Database.DBDsnw,
-		
+		"DBDsnw": r.config.Database.DBDsnw,
+
 		// Webmail settings
-		"Webmail":            r.config.Webmail,
-		"Plugins":            r.config.Plugins,
-		"Includes":           r.config.Includes,
+		"Webmail":                  r.config.Webmail,
+		"Plugins":                  r.config.Plugins,
+		"Includes":                 r.config.Includes,
 		"PermanentSessionLifetime": r.config.PermanentSessionLifetime,
-		"FullTextSearch":     r.config.FullTextSearch,
-		
+		"FullTextSearch":           r.config.FullTextSearch,
+
 		// Additional settings
-		"Timezone":           r.config.Timezone,
-		"MaxFilesize":        r.config.MaxFilesize,
-		
+		"Timezone":    r.config.Timezone,
+		"MaxFilesize": r.config.MaxFilesize,
+
 		// Port and protocol settings
-		"Port80":             r.config.Port80,
-		"ProxyProtocol25":    r.config.ProxyProtocol25,
-		"ProxyProtocol80":    r.config.ProxyProtocol80,
-		"ProxyProtocol443":   r.config.ProxyProtocol443,
-		
+		"Port80":           r.config.Port80,
+		"ProxyProtocol25":  r.config.ProxyProtocol25,
+		"ProxyProtocol80":  r.config.ProxyProtocol80,
+		"ProxyProtocol443": r.config.ProxyProtocol443,
+
 		// Feature flags
-		"Admin":              r.config.Admin.Email != "",
-		"API":                r.config.API,
-		"EnableAntivirus":    r.config.Services.Antivirus,
-		"EnableWebmail":      r.config.Services.Webmail,
-		"EnableFetchmail":    r.config.Services.Fetchmail,
-		"EnableWebdav":       r.config.Services.Webdav,
-		"EnableOletools":     r.config.EnableOletools,
-		"Webdav":             r.config.Services.Webdav,
+		"Admin":           r.config.Admin.Email != "",
+		"API":             r.config.API,
+		"EnableAntivirus": r.config.Services.Antivirus,
+		"EnableWebmail":   r.config.Services.Webmail,
+		"EnableFetchmail": r.config.Services.Fetchmail,
+		"EnableWebdav":    r.config.Services.Webdav,
+		"EnableOletools":  r.config.EnableOletools,
+		"Webdav":          r.config.Services.Webdav,
 	}
 }
 

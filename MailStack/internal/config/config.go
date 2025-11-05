@@ -11,61 +11,61 @@ import (
 
 // Config represents the main MailStack configuration
 type Config struct {
-	Domain                   string          `json:"domain"`
-	Hostname                 string          `json:"hostname"`
-	Hostnames                []string        `json:"hostnames,omitempty"`
-	Postmaster               string          `json:"postmaster"`
-	Admin                    AdminConfig     `json:"admin"`
-	Database                 DatabaseConfig  `json:"database"`
-	TLS                      TLSConfig       `json:"tls"`
-	Mail                     MailConfig      `json:"mail"`
-	Web                      WebConfig       `json:"web"`
-	Services                 ServicesConfig  `json:"services"`
-	Network                  NetworkConfig   `json:"network"`
-	Paths                    PathsConfig     `json:"paths"`
-	DKIMPath                 string          `json:"dkim_path"`
-	SecretKey                string          `json:"secret_key"`
-	
+	Domain     string         `json:"domain"`
+	Hostname   string         `json:"hostname"`
+	Hostnames  []string       `json:"hostnames,omitempty"`
+	Postmaster string         `json:"postmaster"`
+	Admin      AdminConfig    `json:"admin"`
+	Database   DatabaseConfig `json:"database"`
+	TLS        TLSConfig      `json:"tls"`
+	Mail       MailConfig     `json:"mail"`
+	Web        WebConfig      `json:"web"`
+	Services   ServicesConfig `json:"services"`
+	Network    NetworkConfig  `json:"network"`
+	Paths      PathsConfig    `json:"paths"`
+	DKIMPath   string         `json:"dkim_path"`
+	SecretKey  string         `json:"secret_key"`
+
 	// Service addresses
-	FrontAddress             string          `json:"front_address,omitempty"`
-	AdminAddress             string          `json:"admin_address,omitempty"`
-	AntispamAddress          string          `json:"antispam_address,omitempty"`
-	WebmailAddress           string          `json:"webmail_address,omitempty"`
-	WebdavAddress            string          `json:"webdav_address,omitempty"`
-	RedisAddress             string          `json:"redis_address,omitempty"`
-	Resolver                 string          `json:"resolver,omitempty"`
-	
+	FrontAddress    string `json:"front_address,omitempty"`
+	AdminAddress    string `json:"admin_address,omitempty"`
+	AntispamAddress string `json:"antispam_address,omitempty"`
+	WebmailAddress  string `json:"webmail_address,omitempty"`
+	WebdavAddress   string `json:"webdav_address,omitempty"`
+	RedisAddress    string `json:"redis_address,omitempty"`
+	Resolver        string `json:"resolver,omitempty"`
+
 	// Security keys
-	RoundcubeKey             string          `json:"roundcube_key,omitempty"`
-	SnuffleupagusKey         string          `json:"snuffleupagus_key,omitempty"`
-	
+	RoundcubeKey     string `json:"roundcube_key,omitempty"`
+	SnuffleupagusKey string `json:"snuffleupagus_key,omitempty"`
+
 	// Webmail settings
-	Webmail                  string          `json:"webmail,omitempty"` // roundcube, snappymail, none
-	Plugins                  string          `json:"plugins,omitempty"`
-	Includes                 []string        `json:"includes,omitempty"`
-	PermanentSessionLifetime int             `json:"permanent_session_lifetime,omitempty"`
-	FullTextSearch           bool            `json:"full_text_search,omitempty"`
-	
+	Webmail                  string   `json:"webmail,omitempty"` // roundcube, snappymail, none
+	Plugins                  string   `json:"plugins,omitempty"`
+	Includes                 []string `json:"includes,omitempty"`
+	PermanentSessionLifetime int      `json:"permanent_session_lifetime,omitempty"`
+	FullTextSearch           bool     `json:"full_text_search,omitempty"`
+
 	// Additional settings
-	Timezone                 string          `json:"timezone,omitempty"`
-	MaxFilesize              int             `json:"max_filesize,omitempty"` // in MB
-	RealIPHeader             string          `json:"real_ip_header,omitempty"`
-	RealIPFrom               string          `json:"real_ip_from,omitempty"`
-	RelayNets                string          `json:"relay_nets,omitempty"`
-	WebrootRedirect          string          `json:"webroot_redirect,omitempty"`
-	
+	Timezone        string `json:"timezone,omitempty"`
+	MaxFilesize     int    `json:"max_filesize,omitempty"` // in MB
+	RealIPHeader    string `json:"real_ip_header,omitempty"`
+	RealIPFrom      string `json:"real_ip_from,omitempty"`
+	RelayNets       string `json:"relay_nets,omitempty"`
+	WebrootRedirect string `json:"webroot_redirect,omitempty"`
+
 	// Port and protocol settings
-	Port80                   bool            `json:"port_80,omitempty"`
-	ProxyProtocol25          bool            `json:"proxy_protocol_25,omitempty"`
-	ProxyProtocol80          bool            `json:"proxy_protocol_80,omitempty"`
-	ProxyProtocol443         bool            `json:"proxy_protocol_443,omitempty"`
-	TLS443                   bool            `json:"tls_443,omitempty"`
-	TLSError                 bool            `json:"tls_error,omitempty"`
-	TLSPermissive            bool            `json:"tls_permissive,omitempty"`
-	
+	Port80           bool `json:"port_80,omitempty"`
+	ProxyProtocol25  bool `json:"proxy_protocol_25,omitempty"`
+	ProxyProtocol80  bool `json:"proxy_protocol_80,omitempty"`
+	ProxyProtocol443 bool `json:"proxy_protocol_443,omitempty"`
+	TLS443           bool `json:"tls_443,omitempty"`
+	TLSError         bool `json:"tls_error,omitempty"`
+	TLSPermissive    bool `json:"tls_permissive,omitempty"`
+
 	// Feature flags
-	API                      bool            `json:"api,omitempty"`
-	EnableOletools           bool            `json:"enable_oletools,omitempty"`
+	API            bool `json:"api,omitempty"`
+	EnableOletools bool `json:"enable_oletools,omitempty"`
 }
 
 // AdminConfig for admin user
@@ -83,57 +83,57 @@ type DatabaseConfig struct {
 	Name     string `json:"name,omitempty"`
 	User     string `json:"user,omitempty"`
 	Password string `json:"password,omitempty"`
-	DSN      string `json:"dsn,omitempty"`      // Full DSN string
-	DBDsnw   string `json:"db_dsnw,omitempty"`  // For roundcube
+	DSN      string `json:"dsn,omitempty"`     // Full DSN string
+	DBDsnw   string `json:"db_dsnw,omitempty"` // For roundcube
 }
 
 // TLSConfig for TLS/SSL configuration
 type TLSConfig struct {
-	Flavor       string   `json:"flavor"` // letsencrypt, cert, mail-letsencrypt, mail, notls
-	Email        string   `json:"email,omitempty"`
-	CertPath     string   `json:"cert_path,omitempty"`
-	KeyPath      string   `json:"key_path,omitempty"`
-	TLS          []string `json:"tls,omitempty"` // Array of cert/key paths for nginx
+	Flavor   string   `json:"flavor"` // letsencrypt, cert, mail-letsencrypt, mail, notls
+	Email    string   `json:"email,omitempty"`
+	CertPath string   `json:"cert_path,omitempty"`
+	KeyPath  string   `json:"key_path,omitempty"`
+	TLS      []string `json:"tls,omitempty"` // Array of cert/key paths for nginx
 }
 
 // MailConfig for mail server settings
 type MailConfig struct {
-	MessageSizeLimit    int64  `json:"message_size_limit"`
-	MessageRateLimit    string `json:"message_ratelimit"`
-	DefaultQuota        int64  `json:"default_quota"`
-	RecipientDelimiter  string `json:"recipient_delimiter"`
-	DKIMSelector        string `json:"dkim_selector"`
-	RelayHost           string `json:"relay_host,omitempty"`
-	RelayUser           string `json:"relay_user,omitempty"`
-	RelayPassword       string `json:"relay_password,omitempty"`
+	MessageSizeLimit   int64  `json:"message_size_limit"`
+	MessageRateLimit   string `json:"message_ratelimit"`
+	DefaultQuota       int64  `json:"default_quota"`
+	RecipientDelimiter string `json:"recipient_delimiter"`
+	DKIMSelector       string `json:"dkim_selector"`
+	RelayHost          string `json:"relay_host,omitempty"`
+	RelayUser          string `json:"relay_user,omitempty"`
+	RelayPassword      string `json:"relay_password,omitempty"`
 }
 
 // WebConfig for web interface
 type WebConfig struct {
 	AdminPath   string `json:"admin_path"`
 	WebmailPath string `json:"webmail_path"`
-	WebAdmin    string `json:"web_admin,omitempty"`    // Full admin URL path
-	WebWebmail  string `json:"web_webmail,omitempty"`  // Full webmail URL path
-	WebAPI      string `json:"web_api,omitempty"`      // API URL path
+	WebAdmin    string `json:"web_admin,omitempty"`   // Full admin URL path
+	WebWebmail  string `json:"web_webmail,omitempty"` // Full webmail URL path
+	WebAPI      string `json:"web_api,omitempty"`     // API URL path
 	Sitename    string `json:"sitename"`
 	Website     string `json:"website"`
 }
 
 // ServicesConfig for optional services
 type ServicesConfig struct {
-	Antivirus  bool `json:"antivirus"`
-	Webmail    bool `json:"webmail"`
-	Fetchmail  bool `json:"fetchmail"`
-	Webdav     bool `json:"webdav"`
-	Oletools   bool `json:"oletools"`
+	Antivirus bool `json:"antivirus"`
+	Webmail   bool `json:"webmail"`
+	Fetchmail bool `json:"fetchmail"`
+	Webdav    bool `json:"webdav"`
+	Oletools  bool `json:"oletools"`
 }
 
 // NetworkConfig for network settings
 type NetworkConfig struct {
-	Subnet       string `json:"subnet"`
-	Subnet6      string `json:"subnet6,omitempty"`
-	BindIPv4     string `json:"bind_ipv4"`
-	BindIPv6     string `json:"bind_ipv6,omitempty"`
+	Subnet        string `json:"subnet"`
+	Subnet6       string `json:"subnet6,omitempty"`
+	BindIPv4      string `json:"bind_ipv4"`
+	BindIPv6      string `json:"bind_ipv6,omitempty"`
 	RelayNetworks string `json:"relay_networks,omitempty"`
 }
 
@@ -298,7 +298,7 @@ func (c *Config) setDefaults() {
 	if len(c.Hostnames) == 0 {
 		c.Hostnames = []string{c.Hostname}
 	}
-	
+
 	// Service addresses
 	if c.FrontAddress == "" {
 		c.FrontAddress = "front"
@@ -315,7 +315,7 @@ func (c *Config) setDefaults() {
 	if c.Resolver == "" {
 		c.Resolver = "8.8.8.8"
 	}
-	
+
 	// Webmail defaults
 	if c.Webmail == "" {
 		c.Webmail = "none"
@@ -326,7 +326,7 @@ func (c *Config) setDefaults() {
 	if c.Plugins == "" && c.Webmail == "roundcube" {
 		c.Plugins = "'managesieve', 'markasjunk', 'password'"
 	}
-	
+
 	// Web paths
 	if c.Web.WebAdmin == "" {
 		c.Web.WebAdmin = c.Web.AdminPath
@@ -337,12 +337,12 @@ func (c *Config) setDefaults() {
 	if c.Web.WebAPI == "" {
 		c.Web.WebAPI = "/api"
 	}
-	
+
 	// Timezone
 	if c.Timezone == "" {
 		c.Timezone = "UTC"
 	}
-	
+
 	// Max filesize in MB
 	if c.MaxFilesize == 0 {
 		c.MaxFilesize = int(c.Mail.MessageSizeLimit / 1048576) // Convert bytes to MB
@@ -350,13 +350,13 @@ func (c *Config) setDefaults() {
 			c.MaxFilesize = 50
 		}
 	}
-	
+
 	// Port defaults
 	if c.TLS.Flavor != "notls" {
 		c.Port80 = true
 		c.TLS443 = true
 	}
-	
+
 	// TLS certificate paths array for nginx template
 	if len(c.TLS.TLS) == 0 && c.TLS.Flavor == "cert" {
 		c.TLS.TLS = []string{
@@ -364,7 +364,7 @@ func (c *Config) setDefaults() {
 			c.TLS.KeyPath,
 		}
 	}
-	
+
 	// Database DSN construction
 	if c.Database.DSN == "" {
 		c.Database.DSN = c.buildDSN()
@@ -372,7 +372,7 @@ func (c *Config) setDefaults() {
 	if c.Database.DBDsnw == "" {
 		c.Database.DBDsnw = c.Database.DSN
 	}
-	
+
 	// Generate security keys if not provided
 	if c.SecretKey == "" {
 		c.SecretKey = generateRandomKey(32)
@@ -383,12 +383,12 @@ func (c *Config) setDefaults() {
 	if c.SnuffleupagusKey == "" && c.Webmail != "none" {
 		c.SnuffleupagusKey = generateRandomKey(32)
 	}
-	
+
 	// Copy EnableOletools to Services.Oletools for compatibility
 	if c.EnableOletools {
 		c.Services.Oletools = true
 	}
-	
+
 	// Set API flag based on admin settings
 	c.API = c.Admin.Email != ""
 }

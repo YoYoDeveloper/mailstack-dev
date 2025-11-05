@@ -114,7 +114,7 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			// Mail Transfer Agent (MTA)
 			"postfix",
 			"postfix-pcre",
-			
+
 			// IMAP/POP3 Server
 			"dovecot-core",
 			"dovecot-imapd",
@@ -125,38 +125,38 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			"dovecot-mysql",
 			"dovecot-pgsql",
 			"dovecot-sqlite",
-			
+
 			// Anti-spam and filtering
 			"rspamd",
-			
+
 			// Database and caching
 			"redis-server",
-			
+
 			// Web server
 			"nginx",
-			
+
 			// TLS/SSL
 			"ca-certificates",
 			"certbot",
 			"openssl",
-			
+
 			// SASL authentication
 			"libsasl2-modules",
 			"sasl2-bin",
-			
+
 			// Python runtime
 			"python3",
 			"python3-pip",
 			"python3-setuptools",
-			
+
 			// Database clients
 			"sqlite3",
 			"postgresql-client",
 			"default-mysql-client",
-			
+
 			// Let's Encrypt
 			"python3-certbot-nginx",
-			
+
 			// System utilities
 			"curl",
 			"gnupg",
@@ -166,50 +166,50 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			"dnsutils",
 			"iputils-ping",
 		}
-		
+
 	case osdetect.RHEL, osdetect.CentOS, osdetect.Fedora:
 		return []string{
 			// Mail Transfer Agent (MTA)
 			"postfix",
 			"postfix-pcre",
-			
+
 			// IMAP/POP3 Server
 			"dovecot",
 			"dovecot-pigeonhole",
 			"dovecot-mysql",
 			"dovecot-pgsql",
-			
+
 			// Anti-spam and filtering
 			"rspamd",
-			
+
 			// Database and caching
 			"redis",
-			
+
 			// Web server
 			"nginx",
-			
+
 			// TLS/SSL
 			"ca-certificates",
 			"certbot",
 			"openssl",
-			
+
 			// SASL authentication
 			"cyrus-sasl",
 			"cyrus-sasl-plain",
 			"cyrus-sasl-md5",
-			
+
 			// Python runtime
 			"python3",
 			"python3-pip",
-			
+
 			// Database clients
 			"sqlite",
 			"postgresql",
 			"mysql",
-			
+
 			// Let's Encrypt
 			"python3-certbot-nginx",
-			
+
 			// System utilities
 			"curl",
 			"gnupg",
@@ -219,13 +219,13 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			"bind-utils",
 			"iputils",
 		}
-		
+
 	case osdetect.Alpine:
 		return []string{
 			// Mail Transfer Agent (MTA)
 			"postfix",
 			"postfix-pcre",
-			
+
 			// IMAP/POP3 Server
 			"dovecot",
 			"dovecot-lmtpd",
@@ -234,36 +234,36 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			"dovecot-mysql",
 			"dovecot-pgsql",
 			"dovecot-sqlite",
-			
+
 			// Anti-spam and filtering
 			"rspamd",
 			"rspamd-controller",
 			"rspamd-fuzzy",
 			"rspamd-proxy",
-			
+
 			// Database and caching
 			"redis",
-			
+
 			// Web server
 			"nginx",
-			
+
 			// TLS/SSL
 			"ca-certificates",
 			"certbot",
 			"openssl",
-			
+
 			// SASL authentication
 			"cyrus-sasl",
-			
+
 			// Python runtime
 			"python3",
 			"py3-pip",
-			
+
 			// Database clients
 			"sqlite",
 			"postgresql-client",
 			"mysql-client",
-			
+
 			// System utilities
 			"curl",
 			"gnupg",
@@ -272,7 +272,7 @@ func GetRequiredPackages(osType osdetect.OSType) []string {
 			"net-tools",
 			"bind-tools",
 		}
-		
+
 	default:
 		return []string{}
 	}
@@ -286,7 +286,7 @@ func GetOptionalPackages(osType osdetect.OSType, enableAntivirus, enableWebmail 
 	if enableAntivirus {
 		switch osType {
 		case osdetect.Debian, osdetect.Ubuntu:
-			packages = append(packages, 
+			packages = append(packages,
 				"clamav",
 				"clamav-daemon",
 				"clamav-freshclam",
@@ -328,16 +328,16 @@ func GetOptionalPackages(osType osdetect.OSType, enableAntivirus, enableWebmail 
 				"php8.1-ldap",
 				"php8.1-bcmath",
 				"php8.1-opcache",
-				
+
 				// Snuffleupagus security module
 				"php8.1-dev",
 				"gcc",
 				"make",
-				
+
 				// Composer (PHP package manager)
 				"composer",
 			)
-			
+
 		case osdetect.RHEL, osdetect.CentOS, osdetect.Fedora:
 			packages = append(packages,
 				// PHP with all extensions
@@ -357,16 +357,16 @@ func GetOptionalPackages(osType osdetect.OSType, enableAntivirus, enableWebmail 
 				"php-ldap",
 				"php-bcmath",
 				"php-opcache",
-				
+
 				// Development tools
 				"php-devel",
 				"gcc",
 				"make",
-				
+
 				// Composer
 				"composer",
 			)
-			
+
 		case osdetect.Alpine:
 			packages = append(packages,
 				// PHP 8.3 (Alpine's latest)
@@ -387,12 +387,12 @@ func GetOptionalPackages(osType osdetect.OSType, enableAntivirus, enableWebmail 
 				"php83-ldap",
 				"php83-bcmath",
 				"php83-opcache",
-				
+
 				// Development tools
 				"php83-dev",
 				"gcc",
 				"make",
-				
+
 				// Composer
 				"composer",
 			)
