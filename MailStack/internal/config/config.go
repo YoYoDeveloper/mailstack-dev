@@ -122,7 +122,9 @@ type WebConfig struct {
 // ServicesConfig for optional services
 type ServicesConfig struct {
 	Antivirus bool `json:"antivirus"`
-	Webmail   bool `json:"webmail"`
+	// Webmail can be a string to indicate which webmail package to enable
+	// (e.g. "roundcube", "snappymail") or "none" to disable.
+	Webmail   string `json:"webmail,omitempty"`
 	Fetchmail bool `json:"fetchmail"`
 	Webdav    bool `json:"webdav"`
 	Oletools  bool `json:"oletools"`

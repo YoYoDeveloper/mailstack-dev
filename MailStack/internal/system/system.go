@@ -146,7 +146,22 @@ func WriteFile(path string, content []byte, mode os.FileMode) error {
 
 // ServiceExists checks if a systemd service exists
 func ServiceExists(name string) bool {
+	// Special case: check if systemd itself is available
+	if name == "systemd" {
+		return IsSystemdAvailable()
+	}
 	cmd := exec.Command("systemctl", "list-unit-files", name+".service")
+	return cmd.Run() == nil
+}
+
+// IsSystemdAvailable checks if systemd is available on the system
+func IsSystemdAvailable() bool {
+	// Check if systemctl command exists
+	if _, err := exec.LookPath("systemctl"); err != nil {
+		return false
+	}
+	// Check if systemd is running as PID 1
+	cmd := exec.Command("systemctl", "--version")
 	return cmd.Run() == nil
 }
 

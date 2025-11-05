@@ -84,8 +84,9 @@ func (i *Installer) Update() error {
 
 	fmt.Println("Upgrading packages...")
 	requiredPkgs := packages.GetRequiredPackages(i.osInfo.Type)
+	webmailEnabled := (i.config.Webmail != "none" && i.config.Services.Webmail != "" && i.config.Services.Webmail != "none")
 	optionalPkgs := packages.GetOptionalPackages(i.osInfo.Type,
-		i.config.Services.Antivirus, i.config.Services.Webmail)
+		i.config.Services.Antivirus, webmailEnabled)
 
 	allPkgs := append(requiredPkgs, optionalPkgs...)
 
@@ -163,8 +164,9 @@ func (i *Installer) installPackages() error {
 	}
 
 	// Install optional packages
+	webmailEnabled := (i.config.Webmail != "none" && i.config.Services.Webmail != "" && i.config.Services.Webmail != "none")
 	optionalPkgs := packages.GetOptionalPackages(i.osInfo.Type,
-		i.config.Services.Antivirus, i.config.Services.Webmail)
+		i.config.Services.Antivirus, webmailEnabled)
 
 	if len(optionalPkgs) > 0 {
 		if i.verbose {
@@ -395,7 +397,7 @@ func (i *Installer) generateConfigs() error {
 	}
 
 	// Generate Webmail configs if enabled
-	if i.config.Webmail != "none" && i.config.Services.Webmail {
+	if i.config.Webmail != "none" && i.config.Services.Webmail != "" && i.config.Services.Webmail != "none" {
 		if i.verbose {
 			fmt.Printf("  Generating Webmail configuration (%s)...\n", i.config.Webmail)
 		}
