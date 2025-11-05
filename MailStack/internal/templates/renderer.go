@@ -181,9 +181,9 @@ func (r *Renderer) getTemplateData() map[string]interface{} {
 		"Admin":           r.config.Admin.Email != "",
 		"API":             r.config.API,
 		"EnableAntivirus": r.config.Services.Antivirus,
-	// Enable webmail when both top-level webmail selection is not "none"
-	// and Services.Webmail is set to a non-empty/non-"none" value.
-	"EnableWebmail":   (r.config.Webmail != "none" && r.config.Services.Webmail != "" && r.config.Services.Webmail != "none"),
+		// Enable webmail when both top-level webmail selection is not "none"
+		// and Services.Webmail is set to a non-empty/non-"none" value.
+		"EnableWebmail":   (r.config.Webmail != "none" && r.config.Services.Webmail != "" && r.config.Services.Webmail != "none"),
 		"EnableFetchmail": r.config.Services.Fetchmail,
 		"EnableWebdav":    r.config.Services.Webdav,
 		"EnableOletools":  r.config.EnableOletools,

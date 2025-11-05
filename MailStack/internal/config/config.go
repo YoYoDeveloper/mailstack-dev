@@ -125,9 +125,9 @@ type ServicesConfig struct {
 	// Webmail can be a string to indicate which webmail package to enable
 	// (e.g. "roundcube", "snappymail") or "none" to disable.
 	Webmail   string `json:"webmail,omitempty"`
-	Fetchmail bool `json:"fetchmail"`
-	Webdav    bool `json:"webdav"`
-	Oletools  bool `json:"oletools"`
+	Fetchmail bool   `json:"fetchmail"`
+	Webdav    bool   `json:"webdav"`
+	Oletools  bool   `json:"oletools"`
 }
 
 // NetworkConfig for network settings
