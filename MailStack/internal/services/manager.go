@@ -58,9 +58,9 @@ func (m *Manager) checkService(name string) ServiceStatus {
 	// Use systemctl to check service status
 	cmd := exec.Command("systemctl", "is-active", name)
 	output, err := cmd.Output()
-	
+
 	running := err == nil && string(output) == "active\n"
-	
+
 	// Get more detailed status
 	var statusText string
 	if running {

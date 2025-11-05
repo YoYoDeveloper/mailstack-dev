@@ -25,7 +25,7 @@ func statusCmd() *cobra.Command {
 			}
 
 			fmt.Println("📊 MailStack Service Status:")
-			
+
 			for _, svc := range status {
 				icon := "✅"
 				if !svc.Running {

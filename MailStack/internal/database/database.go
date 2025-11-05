@@ -33,7 +33,7 @@ type Domain struct {
 // Connect establishes a database connection
 func Connect(cfg config.DatabaseConfig) (*DB, error) {
 	var dbPath string
-	
+
 	// Parse DSN to get database path
 	if cfg.DSN != "" {
 		// DSN format: "sqlite:/path/to/db"
@@ -105,7 +105,7 @@ func (db *DB) AddUser(email, password string, quota int64) error {
 		INSERT INTO users (email, password_hash, quota_bytes, enabled, global_admin)
 		VALUES (?, ?, ?, 1, 0)
 	`, email, string(hashedPassword), quota)
-	
+
 	if err != nil {
 		if strings.Contains(err.Error(), "UNIQUE constraint failed") {
 			return fmt.Errorf("user %s already exists", email)
@@ -196,7 +196,7 @@ func (db *DB) ChangePassword(email, password string) error {
 		SET password_hash = ?, updated_at = CURRENT_TIMESTAMP 
 		WHERE email = ?
 	`, string(hashedPassword), email)
-	
+
 	if err != nil {
 		return fmt.Errorf("failed to update password: %w", err)
 	}
@@ -216,7 +216,7 @@ func (db *DB) AddDomain(domain string) error {
 		INSERT INTO domains (name, enabled)
 		VALUES (?, 1)
 	`, domain)
-	
+
 	if err != nil {
 		if strings.Contains(err.Error(), "UNIQUE constraint failed") {
 			return fmt.Errorf("domain %s already exists", domain)
