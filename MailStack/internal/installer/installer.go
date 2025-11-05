@@ -82,11 +82,11 @@ func (i *Installer) Update() error {
 
 	fmt.Println("Upgrading packages...")
 	requiredPkgs := packages.GetRequiredPackages(i.osInfo.Type)
-	optionalPkgs := packages.GetOptionalPackages(i.osInfo.Type, 
+	optionalPkgs := packages.GetOptionalPackages(i.osInfo.Type,
 		i.config.Services.Antivirus, i.config.Services.Webmail)
-	
+
 	allPkgs := append(requiredPkgs, optionalPkgs...)
-	
+
 	if err := i.pkgMgr.Install(allPkgs); err != nil {
 		return fmt.Errorf("failed to upgrade packages: %w", err)
 	}
@@ -139,7 +139,7 @@ func (i *Installer) installPackages() error {
 
 	// Get required packages
 	requiredPkgs := packages.GetRequiredPackages(i.osInfo.Type)
-	
+
 	if i.verbose {
 		fmt.Printf("  Installing %d required packages...\n", len(requiredPkgs))
 	}
@@ -168,7 +168,7 @@ func (i *Installer) installPackages() error {
 		if i.verbose {
 			fmt.Printf("  Installing %d optional packages...\n", len(optionalPkgs))
 		}
-		
+
 		var toInstallOptional []string
 		for _, pkg := range optionalPkgs {
 			if !i.pkgMgr.IsInstalled(pkg) {
@@ -288,7 +288,7 @@ func (i *Installer) generateConfigs() error {
 	}
 
 	// TODO: Generate Dovecot configs
-	// TODO: Generate Rspamd configs  
+	// TODO: Generate Rspamd configs
 	// TODO: Generate Nginx configs
 
 	return nil

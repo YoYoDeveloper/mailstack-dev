@@ -39,7 +39,7 @@ func Detect() (*OSInfo, error) {
 	if osRelease, err := parseOSRelease(); err == nil {
 		info.Name = osRelease["NAME"]
 		info.Version = osRelease["VERSION_ID"]
-		
+
 		// Determine OS type from ID
 		id := strings.ToLower(osRelease["ID"])
 		switch id {
@@ -65,7 +65,7 @@ func Detect() (*OSInfo, error) {
 				}
 			}
 		}
-		
+
 		return info, nil
 	}
 
@@ -109,7 +109,7 @@ func parseOSRelease() (map[string]string, error) {
 
 	result := make(map[string]string)
 	lines := strings.Split(string(data), "\n")
-	
+
 	for _, line := range lines {
 		line = strings.TrimSpace(line)
 		if line == "" || strings.HasPrefix(line, "#") {
@@ -123,10 +123,10 @@ func parseOSRelease() (map[string]string, error) {
 
 		key := strings.TrimSpace(parts[0])
 		value := strings.TrimSpace(parts[1])
-		
+
 		// Remove quotes
 		value = strings.Trim(value, `"'`)
-		
+
 		result[key] = value
 	}
 

@@ -171,7 +171,7 @@ func GetOptionalPackages(osType osdetect.OSType, enableAntivirus, enableWebmail 
 	if enableWebmail {
 		switch osType {
 		case osdetect.Debian, osdetect.Ubuntu:
-			packages = append(packages, "php-fpm", "php-cli", "php-json", "php-mysql", 
+			packages = append(packages, "php-fpm", "php-cli", "php-json", "php-mysql",
 				"php-pgsql", "php-sqlite3", "php-curl", "php-mbstring", "php-xml")
 		case osdetect.RHEL, osdetect.CentOS, osdetect.Fedora:
 			packages = append(packages, "php-fpm", "php-cli", "php-json", "php-mysqlnd",
